@@ -4,3 +4,6 @@
 @keyframes sway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 @keyframes bloomIn { 0% { transform: scale(0.2); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .flower.sway { animation: none; } }
+.scene { position: relative; width: 100%; max-width: 720px; margin: 0 auto; aspect-ratio: 3/2; overflow: hidden; border: 4px solid #222; image-rendering: pixelated; }
+.scene-ground { position: absolute; inset: 55% 0 0 0; }
+.plot { position: absolute; inset: 0; display: grid; align-items: end; justify-items: center; padding: 8px; }
