@@ -7,3 +7,21 @@
 .scene { position: relative; width: 100%; max-width: 720px; margin: 0 auto; aspect-ratio: 3/2; overflow: hidden; border: 4px solid #222; image-rendering: pixelated; }
 .scene-ground { position: absolute; inset: 55% 0 0 0; }
 .plot { position: absolute; inset: 0; display: grid; align-items: end; justify-items: center; padding: 8px; }
+:root { font-family: "Press Start 2P", monospace; }
+body { margin: 0; background: #11131a; color: #f4f4f4; line-height: 1.6; }
+.creator, .garden { max-width: 760px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.muted { opacity: 0.7; font-size: 0.8em; }
+.ok { color: #92ffa6; }
+.turnline { text-align: center; }
+.scene[data-ambient="fireflies"]::after,
+.scene[data-ambient="butterflies"]::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(2px 2px at 20% 30%, #fff6, transparent),
+                    radial-gradient(2px 2px at 70% 40%, #fff6, transparent),
+                    radial-gradient(2px 2px at 45% 20%, #fff6, transparent);
+  animation: drift 6s ease-in-out infinite alternate;
+}
+.scene[data-ambient="fireflies"]::after { filter: drop-shadow(0 0 3px #ffec8b); }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+@media (prefers-reduced-motion: reduce) { .scene::after { animation: none; } }

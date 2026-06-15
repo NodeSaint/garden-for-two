@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# A Garden for Two
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A tiny pixel-art garden that two people grow together, one flower at a time. It is
+static and backendless: there is no login and no server. The entire garden lives
+inside a single link, compressed with lz-string, so you grow it by passing the URL
+back and forth.
 
-Currently, two official plugins are available:
+## How the link-passing loop works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+On your turn you plant up to three flowers and water the garden to help things grow
+(seed → sprout → bud → bloom). Each flower carries a short note and remembers who
+planted it; tap a flower to read it. When you are done, the app encodes the whole
+garden into a link. Send that link to the other person. They open it, see your
+garden, take their turn, and send a fresh link back. Repeat for as long as you like.
 
-## React Compiler
+## Sceneries
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Pick one of three backdrops for your garden:
 
-## Expanding the ESLint configuration
+- **Spring Meadow**
+- **Moonlit Garden**
+- **Seaside Garden**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Develop
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+npm run dev      # local dev server
+npm test         # unit tests (vitest)
+npm run e2e      # playwright (chromium + webkit)
+npm run build    # production build to dist/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deploy
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The build is fully static, so it deploys to GitHub Pages with no extra services.
+Run `npm run build` and publish the `dist/` folder (push `dist` to your Pages
+branch, or serve it from the `main` branch).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Licence
+
+MIT. See [LICENSE](./LICENSE) and [CREDITS.md](./CREDITS.md).
