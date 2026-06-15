@@ -2,7 +2,14 @@
 
 All notable changes to this project are documented here.
 
-## [Unreleased] — initial build (branch: dev)
+## 2026-06-15 — first deploy (branch: `main` → GitHub Pages)
+
+- Pushed `main` + `dev` to github.com/NodeSaint/garden-for-two (public). Live at
+  https://nodesaint.github.io/garden-for-two/ via a GitHub Actions Pages workflow
+  (build + deploy-pages); push to `main` redeploys. Verified live: 200, correct title,
+  JS/CSS bundles load from the project subpath.
+
+## 2026-06-15 — initial build (branch: `dev`)
 
 - Static, backendless React + TypeScript pixel-art game; entire garden state encoded in the URL via lz-string (no backend, no login).
 - Core loop: plant up to 3 flowers per turn + water to grow (seed→sprout→bud→bloom), each flower carries an ≤80-char note and remembers who planted it; tap a flower to read it.
