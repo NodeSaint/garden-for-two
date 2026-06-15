@@ -17,4 +17,10 @@ describe("PlantPicker", () => {
     render(<PlantPicker onPlant={vi.fn()} onCancel={vi.fn()} />);
     expect(screen.getByLabelText(/note/i)).toHaveAttribute("maxLength", "80");
   });
+  it("cancels on Escape", async () => {
+    const onCancel = vi.fn();
+    render(<PlantPicker onPlant={vi.fn()} onCancel={onCancel} />);
+    await userEvent.keyboard("{Escape}");
+    expect(onCancel).toHaveBeenCalled();
+  });
 });

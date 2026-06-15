@@ -13,3 +13,5 @@ All notable changes to this project are documented here.
 - End-to-end flow (create → plant → share link → reopen as recipient → plant back) verified with Playwright on **chromium and webkit** (the iOS Safari renderer, iPhone 13 viewport) with zero console errors. v1 is built and e2e-verified.
 - Fix: flowers now show real planting dates — `src/App.tsx` injects a wall-clock `Date.now()` epoch at the app boundary (pure model stays deterministic via passed-in timestamps); previously `performance.now()` rendered every date as 1/1/1970.
 - Cleanup: removed dead `at` param from `createGarden`, dead `now` prop from `Creator`, and unreferenced scaffold assets (`public/favicon.svg`, `public/icons.svg`, `src/assets/hero.png`, `src/assets/react.svg`, `src/assets/vite.svg`).
+- Feature: per-flower watering — tap any flower and water it from its detail dialog (only on your turn, only while it's below full bloom); the blunt "water last" button is gone.
+- A11y: dialogs (`PlantPicker`, `FlowerDetail`) now close on Escape, move focus into themselves on open and restore focus to the prior element on close, and expose `aria-modal="true"`.

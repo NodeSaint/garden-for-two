@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FlowerType, Palette } from "../state/types";
 import { FLOWER_TYPES, PALETTES, NOTE_MAX } from "../state/types";
 import { PixelSprite } from "../art/PixelSprite";
@@ -11,8 +11,21 @@ export function PlantPicker({ onPlant, onCancel }: {
   const [type, setType] = useState<FlowerType>("tulip");
   const [palette, setPalette] = useState<Palette>("rose");
   const [note, setNote] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    ref.current?.focus();
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onCancel(); }
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      prev?.focus();
+    };
+  }, [onCancel]);
+
   return (
-    <div className="nes-dialog is-rounded picker" role="dialog" aria-label="plant a flower">
+    <div ref={ref} tabIndex={-1} className="nes-dialog is-rounded picker" role="dialog" aria-modal="true" aria-label="plant a flower">
       <p className="title">plant a flower</p>
       <div className="row">
         {FLOWER_TYPES.map((t) => (

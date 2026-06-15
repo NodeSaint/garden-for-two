@@ -51,15 +51,10 @@ export function Garden({ garden, me, now, onChange, baseUrl }: {
         <button className="nes-btn is-primary" disabled={!canPlant} onClick={() => setPicking(true)}>
           plant a flower ({MAX_PLANTS_PER_TURN - used} left)
         </button>
-        {garden.plants.length > 0 && (
-          <button className="nes-btn" onClick={() => doWater(garden.plants[garden.plants.length - 1].id)}>
-            water last 💧
-          </button>
-        )}
       </div>
 
       {picking && <PlantPicker onPlant={plant} onCancel={() => setPicking(false)} />}
-      {detailPlant && <FlowerDetail plant={detailPlant} names={{ a: garden.a, b: garden.b }} onClose={() => setDetail(null)} />}
+      {detailPlant && <FlowerDetail plant={detailPlant} names={{ a: garden.a, b: garden.b }} onClose={() => setDetail(null)} canWater={garden.turn === me} onWater={doWater} />}
 
       {(dirty || garden.plants.length > 0) && (
         <>
