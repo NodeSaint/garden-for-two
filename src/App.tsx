@@ -11,7 +11,7 @@ function baseUrl(): string {
 }
 
 function nowMs(): number {
-  return typeof performance !== "undefined" ? Math.floor(performance.now()) : 1;
+  return Date.now();
 }
 
 export function App({ initialHash, identity }: { initialHash?: string; identity?: Who | null }) {
@@ -20,7 +20,7 @@ export function App({ initialHash, identity }: { initialHash?: string; identity?
   const [me] = useState<Who>(() => identity ?? (garden ? garden.turn : "a"));
 
   function onCreate(o: { a: string; b: string; scene: Scene }) {
-    setGarden(createGarden({ ...o, at: nowMs() + 1 }));
+    setGarden(createGarden({ ...o }));
   }
 
   function onChange(g: G) {

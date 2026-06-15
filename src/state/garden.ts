@@ -10,7 +10,7 @@ function makeId(at: number): string {
   return `${at.toString(36)}-${seq.toString(36)}`;
 }
 
-export function createGarden(opts: { scene: Scene; a: string; b: string; at: number }): Garden {
+export function createGarden(opts: { scene: Scene; a: string; b: string }): Garden {
   return { v: 1, scene: opts.scene, a: opts.a.slice(0, 24), b: opts.b.slice(0, 24), turn: "a", plants: [] };
 }
 

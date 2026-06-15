@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { createGarden, addPlant, water, plantsAddedBy, MAX_PLANTS_PER_TURN_ERR } from "./garden";
 import { MAX_STAGE } from "./types";
 
-const base = () => createGarden({ scene: "meadow", a: "Sam", b: "Robin", at: 1000 });
+const base = () => createGarden({ scene: "meadow", a: "Sam", b: "Robin" });
 
 describe("createGarden", () => {
   it("starts empty, creator's turn, version 1", () => {

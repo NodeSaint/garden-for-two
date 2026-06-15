@@ -3,7 +3,7 @@ import { encodeGarden, decodeGarden, linkFor, parseHash } from "./share";
 import { createGarden, addPlant } from "./garden";
 
 const sample = () =>
-  addPlant(createGarden({ scene: "sea", a: "Sam", b: "Robin", at: 1 }),
+  addPlant(createGarden({ scene: "sea", a: "Sam", b: "Robin" }),
     { type: "rose", palette: "coral", x: 2, y: 1, by: "a", note: "for you", at: 2 });
 
 describe("encode/decode round-trip", () => {

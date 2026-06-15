@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { Garden } from "./Garden";
 import { createGarden } from "../state/garden";
 
-const g = createGarden({ scene: "meadow", a: "Sam", b: "Robin", at: 1 });
+const g = createGarden({ scene: "meadow", a: "Sam", b: "Robin" });
 
 describe("Garden screen", () => {
   it("lets the current player open the planter and plant a flower", async () => {

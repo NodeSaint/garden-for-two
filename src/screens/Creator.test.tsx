@@ -6,7 +6,7 @@ import { Creator } from "./Creator";
 describe("Creator", () => {
   it("collects names + scene and calls onCreate", async () => {
     const onCreate = vi.fn();
-    render(<Creator onCreate={onCreate} now={1234} />);
+    render(<Creator onCreate={onCreate} />);
     await userEvent.type(screen.getByLabelText(/your name/i), "Sam");
     await userEvent.type(screen.getByLabelText(/their name/i), "Robin");
     await userEvent.click(screen.getByRole("button", { name: /seaside/i }));

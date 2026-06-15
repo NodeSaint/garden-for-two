@@ -7,7 +7,7 @@ const SCENE_LABELS: { id: Scene; label: string }[] = [
   { id: "sea", label: "Seaside Garden" },
 ];
 
-export function Creator({ onCreate }: { onCreate: (o: { a: string; b: string; scene: Scene }) => void; now?: number }) {
+export function Creator({ onCreate }: { onCreate: (o: { a: string; b: string; scene: Scene }) => void }) {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const [scene, setScene] = useState<Scene>("meadow");
