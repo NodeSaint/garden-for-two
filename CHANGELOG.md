@@ -10,3 +10,4 @@ All notable changes to this project are documented here.
 - 6 flower types × 6 colour palettes, rendered from in-repo pixel matrices to a scaled, pixelated canvas; sway + bloom-in animation.
 - Share sheet with a safe clipboard fallback (no false "copied" on failure) + WhatsApp deep link.
 - Pure model + codec fully unit-tested; component tests via Testing Library.
+- End-to-end flow (create → plant → share link → reopen as recipient → plant back) verified with Playwright on **chromium and webkit** (the iOS Safari renderer, iPhone 13 viewport) with zero console errors. v1 is built and e2e-verified.
