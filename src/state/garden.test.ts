@@ -54,4 +54,30 @@ describe("plantsAddedBy", () => {
     const g = base();
     expect(plantsAddedBy(g, "a")).toBe(0);
   });
+
+  it("resets each person's budget per turn even when timestamps reset across turns", () => {
+    // Each link opens in a fresh document, so performance.now() (p.t) restarts near 0.
+    // A planted late in a long session (large t); B then opens fresh and plants with small t.
+    let g = base();
+    g = addPlant(g, { type: "tulip", palette: "rose", x: 0, y: 0, by: "a", note: "", at: 8421 });
+    g = addPlant(g, { type: "daisy", palette: "sky", x: 1, y: 0, by: "a", note: "", at: 9050 });
+    g = addPlant(g, { type: "rose", palette: "coral", x: 2, y: 0, by: "a", note: "", at: 10110 });
+    expect(plantsAddedBy(g, "a")).toBe(3);
+    expect(plantsAddedBy(g, "b")).toBe(0);
+
+    // B's turn: smaller timestamps than A's, must still count toward B's budget.
+    g = addPlant(g, { type: "tulip", palette: "mint", x: 3, y: 0, by: "b", note: "", at: 42 });
+    expect(plantsAddedBy(g, "b")).toBe(1);
+    g = addPlant(g, { type: "daisy", palette: "lilac", x: 4, y: 0, by: "b", note: "", at: 90 });
+    g = addPlant(g, { type: "rose", palette: "amber", x: 5, y: 0, by: "b", note: "", at: 140 });
+    expect(plantsAddedBy(g, "b")).toBe(3);
+    // B's 4th plant must be rejected.
+    expect(() => addPlant(g, { type: "tulip", palette: "sky", x: 6, y: 0, by: "b", note: "", at: 200 }))
+      .toThrow(MAX_PLANTS_PER_TURN_ERR);
+
+    // Back to A: fresh window, budget reset to 0.
+    expect(plantsAddedBy(g, "a")).toBe(0);
+    g = addPlant(g, { type: "rose", palette: "rose", x: 6, y: 0, by: "a", note: "", at: 7 });
+    expect(plantsAddedBy(g, "a")).toBe(1);
+  });
 });

@@ -15,8 +15,15 @@ export function createGarden(opts: { scene: Scene; a: string; b: string; at: num
 }
 
 export function plantsAddedBy(g: Garden, who: Who): number {
-  const lastOther = g.plants.filter((p) => p.by !== who).reduce((m, p) => Math.max(m, p.t), 0);
-  return g.plants.filter((p) => p.by === who && p.t >= lastOther).length;
+  // Count plants by `who` that come after the other person's most recent plant.
+  // Uses array (causal insertion) order rather than `p.t` timestamps: each link is
+  // opened in a fresh document where performance.now() resets to ~0, so timestamps
+  // from different turns are not comparable and would corrupt the per-turn budget.
+  let lastOther = -1;
+  for (let i = 0; i < g.plants.length; i++) if (g.plants[i].by !== who) lastOther = i;
+  let n = 0;
+  for (let i = lastOther + 1; i < g.plants.length; i++) if (g.plants[i].by === who) n++;
+  return n;
 }
 
 export function addPlant(
